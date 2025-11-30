@@ -25,14 +25,22 @@ stages:
       hash: md5
       md5: 7f213ef56927a6565eda24c734cecf1b
       size: 4700
+    - path: params.yaml
+      hash: md5
+      md5: 3315f0c0c2691e782e3404f0b4f87a86
+      size: 45
     - path: src/models/train_model.py
       hash: md5
-      md5: b2ad75cfc5b5edcd52169022a15ef5d7
-      size: 1469
+      md5: 4935bcaf8a85f24c620c9507e7736db0
+      size: 2274
+    params:
+      params.yaml:
+        train.max_iter: 200
+        train.random_state: 42
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: e20f8d92b61410db8fa0b40d150929fb
+      md5: 36d0a638ec082695f341051db389ed3e
       size: 1151
   evaluate:
     cmd: python src/evaluate_model.py data/processed/iris_processed.csv 
@@ -44,7 +52,7 @@ stages:
       size: 4700
     - path: models/model.pkl
       hash: md5
-      md5: e20f8d92b61410db8fa0b40d150929fb
+      md5: 36d0a638ec082695f341051db389ed3e
       size: 1151
     - path: src/evaluate_model.py
       hash: md5
