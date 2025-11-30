@@ -1,0 +1,9 @@
+stages:
+  prepare:
+    cmd: python src/data/make_dataset.py data/raw/iris.csv 
+      data/processed/iris_processed.csv
+    deps:
+    - data/raw/iris.csv
+    - src/data/make_dataset.py
+    outs:
+    - data/processed/iris_processed.csv
