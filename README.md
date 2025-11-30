@@ -13,7 +13,7 @@
 
 1. Клонировать репозиторий:
    ```bash
-   git clone <URL_репозитория>
+   git clone [<URL_репозитория>](https://github.com/flazy2222/mlops_hw1_Aglullin.git)
    cd mlops_hw1_Aglullin
 2. Установить завимимости: 
 pip install -r requirements.txt
