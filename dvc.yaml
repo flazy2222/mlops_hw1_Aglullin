@@ -7,3 +7,20 @@ stages:
     - src/data/make_dataset.py
     outs:
     - data/processed/iris_processed.csv
+  train:
+    cmd: python src/models/train_model.py data/processed/iris_processed.csv 
+      models/model.pkl
+    deps:
+    - data/processed/iris_processed.csv
+    - src/models/train_model.py
+    outs:
+    - models/model.pkl
+  evaluate:
+    cmd: python src/evaluate_model.py data/processed/iris_processed.csv 
+      models/model.pkl metrics.json
+    deps:
+    - data/processed/iris_processed.csv
+    - models/model.pkl
+    - src/evaluate_model.py
+    outs:
+    - metrics.json

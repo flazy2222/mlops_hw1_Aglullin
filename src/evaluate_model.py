@@ -1,29 +1,29 @@
+import sys
 import pandas as pd
 import joblib
 from sklearn.metrics import accuracy_score
 import json
-import sys
 
-# Аргументы: путь к данным и к модели
-input_path = sys.argv[1]
-model_path = sys.argv[2]
-metrics_path = sys.argv[3]
 
-# Загружаем данные и модель
-data = pd.read_csv(input_path)
-model = joblib.load(model_path)
+def main(input_path: str, model_path: str, metrics_path: str) -> None:
+    df = pd.read_csv(input_path, header=None)
 
-X = data.drop("species", axis=1)
-y = data["species"]
+    X = df.iloc[:, :-1]
+    y = df.iloc[:, -1]
 
-# Предсказания
-y_pred = model.predict(X)
+    model = joblib.load(model_path)
+    preds = model.predict(X)
 
-# Вычисляем метрики
-metrics = {"accuracy": accuracy_score(y, y_pred)}
+    acc = accuracy_score(y, preds)
+    metrics = {"accuracy": acc}
+    print(f"Evaluate accuracy: {acc}")
 
-# Сохраняем в JSON
-with open(metrics_path, "w") as f:
-    json.dump(metrics, f, indent=4)
+    with open(metrics_path, "w", encoding="utf-8") as f:
+        json.dump(metrics, f, indent=4)
 
-print(f"Metrics saved to {metrics_path}")
+
+if __name__ == "__main__":
+    input_path = sys.argv[1]
+    model_path = sys.argv[2]
+    metrics_path = sys.argv[3]
+    main(input_path, model_path, metrics_path)
